@@ -11,19 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
 Auth::routes();
 
-
 // ゲスト状態
-// Route::get('/','QuestionController@home')->name('home');
+Route::get('/','HistoriesController@home');
 // ログイン状態
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/login_completed', 'HomeController@index')->name('home');
-    Route::post('/record_completed', 'HistoriesController@add');    
+    Route::post('/record_completed', 'HistoriesController@add');
+    Route::get('/index', 'HistoriesController@index')->name('index');
+    Route::get('/edit', 'HistoriesController@edit')->name('edit');
+    Route::post('/update_completed', 'HistoriesController@update')->name('update');
+    Route::get('/delete', 'HistoriesController@delete');
 });
 
 

@@ -16,7 +16,7 @@
                     @csrf
                     @if (count($errors) > 0)
                         <ul>
-                            @foreach($errors->all() as $e)
+                            @foreach ($errors->all() as $e)
                                 <li>{{ $e }}</li>
                             @endforeach
                         </ul>
@@ -29,7 +29,9 @@
                         <p>カテゴリー</p>
                         <label for="category">
                             <select for="category" name="category" id="" size="1" >
-                                <option value="食費">食費</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category }}">{{ $category }}</option>
+                                @endforeach
                             </select>
                         </label>
                     </div>
@@ -47,8 +49,27 @@
             </div>
             
             <div>
-                <h3>今月の支出</h3>
-                
+                <h3>家計簿の検索</h3>
+                <div class="search-content">
+                    <form action="{{ action('HistoriesController@index') }}" method="get">
+                    @csrf
+                        <label for="year">
+                            <select class="" for="year" name="year" id="" size="1" >
+                            @for ($i = 2020; $i < 2050; $i++)
+                                <option value="{{ $i }}">{{ $i }}年</option>
+                            @endfor
+                            </select>
+                        </label>
+                        <label for="month">
+                            <select class="" for="month" name="month" id="" size="1" >
+                            @for ($i = 1; $i <= 12; $i++)
+                                <option value="{{ $i }}">{{ $i }}月</option>
+                            @endfor
+                            </select>
+                        </label>
+                        <button class="search-btn" style="width:70px;height:30px;border-radius:2px;">絞り込む</button>
+                    </form>
+                </div>  
             </div>
         </div>
     </div>
