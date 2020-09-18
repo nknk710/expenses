@@ -2,15 +2,18 @@
 
 @section('title', '家計簿アプリ')
 
+@section('page_css')
+<link rel="stylesheet" href="{{ secure_asset('css/home.css') }}" type="text/css" />
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div>
+            <div class="title">
                 <h1>家計簿アプリ</h1>
             </div>
             
-            <div>
+            <div class="content">
                 <h3>支出を記録する</h3>
                 <form method="POST" action="{{ action('HistoriesController@add') }}">
                     @csrf
@@ -21,12 +24,12 @@
                             @endforeach
                         </ul>
                     @endif
-                    <div>
-                        <p>日時</p>
+                    <div class="data">
+                        <p class="data-title">・日時</p>
                         <input type="date" name="date"/>
                     </div>
-                    <div>
-                        <p>カテゴリー</p>
+                    <div class="data">
+                        <p class="data-title">・カテゴリー</p>
                         <label for="category">
                             <select for="category" name="category" id="" size="1" >
                                 @foreach ($categories as $category)
@@ -35,20 +38,20 @@
                             </select>
                         </label>
                     </div>
-                    <div>
-                        <p>メモ（支出の内容）</p>
+                    <div class="data">
+                        <p class="data-title">・メモ（支出の内容）</p>
                         <input type="text" name="content"/>
                     </div>
-                    <div>
-                        <p>金額</p>
-                        <span>¥</span><input type="text" name="cost" placeholder="半角数字で入力してください"/>
+                    <div class="data">
+                        <p class="data-title">・金額</p>
+                        <span>¥ </span><input type="text" name="cost" placeholder="半角数字で入力してください"/>
                     </div>
-                    <button class="">家計簿をつける</button>
+                    <button class="add-btn">家計簿をつける</button>
                 </form>
                 
             </div>
             
-            <div>
+            <div class="content">
                 <h3>家計簿の検索</h3>
                 <div class="search-content">
                     <form action="{{ action('HistoriesController@index') }}" method="get">
@@ -67,7 +70,7 @@
                             @endfor
                             </select>
                         </label>
-                        <button class="search-btn" style="width:70px;height:30px;border-radius:2px;">絞り込む</button>
+                        <button class="search-btn">絞り込む</button>
                     </form>
                 </div>  
             </div>

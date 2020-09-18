@@ -1,0 +1,27 @@
+.search-btn {
+    width: 100px;
+}
+
+.category-total {
+    border: 1px solid #888;
+    padding: 30px;
+    margin-bottom: 30px
+}
+
+.content-title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.table {
+    background-color: #fff;
+}
+
+.total-cost {
+    font-size: 1.7rem;
+}
+
+.all-history {
+    border: 1px solid #888;
+    padding: 30px;
+}

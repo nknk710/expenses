@@ -2,11 +2,15 @@
 
 @section('title', '一覧')
 
+@section('page_css')
+<link rel="stylesheet" href="{{ secure_asset('css/index.css') }}" type="text/css" />
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="search-content">
+                
                 <form action="{{ action('HistoriesController@index') }}" method="get">
                 @csrf
                     <label for="year">
@@ -23,18 +27,41 @@
                         @endfor
                         </select>
                     </label>
-                    <button class="search-btn" style="width:70px;height:30px;border-radius:2px;">絞り込む</button>
+                    <button class="search-btn">絞り込む</button>
                 </form>
             </div>  
-            <div>
-                <h3>{{ $year }}年{{ $month }}月のカテゴリー別支出一覧</h3>
-                @forelse ($categories as $category)
-                    <p>{{ $category }}</p>
-                    <p>¥{{ $category_total[$loop->index] }}</p>
-                @empty
-                @endforelse
+            <div class="main-content">
+                <div class="category-total">
+                    <h3 class="content-title">{{ $year }}年{{ $month }}月のカテゴリー別支出一覧</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="14%">{{ $categories[0] }}</th>
+                                <th width="14%">{{ $categories[1] }}</th>
+                                <th width="14%">{{ $categories[2] }}</th>
+                                <th width="14%">{{ $categories[3] }}</th>
+                                <th width="14%">{{ $categories[4] }}</th>
+                                <th width="14%">{{ $categories[5] }}</th>
+                                <th width="14%">{{ $categories[6] }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>¥ {{ $category_total[0] }}</th>
+                                <th>¥ {{ $category_total[1] }}</th>
+                                <th>¥ {{ $category_total[2] }}</th>
+                                <th>¥ {{ $category_total[3] }}</th>
+                                <th>¥ {{ $category_total[4] }}</th>
+                                <th>¥ {{ $category_total[5] }}</th>
+                                <th>¥ {{ $category_total[6] }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="total-cost">TOTAL ¥ {{ array_sum($category_total)}}</p>
+                </div>
                 
-                <h3>{{ $year }}年{{ $month }}月の支出詳細一覧</h3>
+                <div class="all-history">
+                    <h3 class="content-title">{{ $year }}年{{ $month }}月の支出詳細一覧</h3>
                 <form action="{{ action('HistoriesController@index') }}" method="get">
                 @csrf
                     <input type="hidden" name="year" value="{{ $year }}">
@@ -68,7 +95,7 @@
                                             <a href="{{ action('HistoriesController@edit', ['id' => $record->id]) }}">編集</a>
                                         </div>
                                         <div>
-                                            <a href="{{ action('HistoriesController@delete', ['id' => $record->id]) }}">削除</a>
+                                            <a id="delete-btn" href="{{ action('HistoriesController@delete', ['id' => $record->id]) }}">削除</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -79,6 +106,8 @@
                     @if (count($records) <= 0)
                         <p>記録がありません</p>
                     @endif
+                
+                </div>
                 
             </div>
             

@@ -1,0 +1,25 @@
+.content {
+    width: 300px;
+    margin: 30px 0;
+    padding: 30px;
+    border: 1px solid #444;
+    border-radius: 1px;
+    background-color: rgb(150, 220, 60);
+}
+
+input {
+    width: 200px;
+}
+
+.data-title {
+    margin: 10px 0 0;
+}
+
+.add-btn {
+    margin-top: 20px;
+    width: 200px;
+}
+
+.search-btn {
+    width: 100px;
+}
