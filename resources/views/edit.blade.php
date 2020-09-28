@@ -31,7 +31,7 @@
                         <label for="category">
                             <select for="category" name="category" id="" size="1" >
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category }}">{{ $category }}</option>
+                                    <option value="{{ $category }}" {{ $category == $record->category ? "selected" : "" }}>{{ $category }}</option>
                                 @endforeach
                             </select>
                         </label>
