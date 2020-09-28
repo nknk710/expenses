@@ -24,8 +24,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/edit', 'HistoriesController@edit')->name('edit');
     Route::post('/update_completed', 'HistoriesController@update')->name('update');
     Route::get('/delete', 'HistoriesController@delete')->name('delete');
-    
-    Route::post('/category_add', 'HistoriesController@category_add')->name('category_add');
 });
 
 

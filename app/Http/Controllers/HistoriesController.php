@@ -125,14 +125,4 @@ class HistoriesController extends Controller
         return redirect('month_index', ['year' => $year, 'month' => $month]);
     }
     
-    public function category_add(Request $request)
-    {
-        $form = $request->all();
-        $category = new Category;
-        unset($form['_token']);
-        
-        $category->fill($form)->save();
-    
-        return view('home');
-    }
 }

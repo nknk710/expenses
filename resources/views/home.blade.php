@@ -100,13 +100,4 @@
         </div>
     </div>
 </div>
-                <div class="search-content">
-                    <form action="{{ route('category_add') }}" method="post">
-                    @csrf
-                        <label for="year">
-                            <input type="text" name="category"/>
-                        </label>
-                        <button class="btn">追加</button>
-                    </form>
-                </div>  
 @endsection
