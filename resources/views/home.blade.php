@@ -47,7 +47,7 @@
                         <span>¥ </span><input type="text" name="cost" class="yen" placeholder="半角数字で入力してください"/>
                     </div>
                     @guest
-                        <button class="add-btn">家計簿を記録するにはログインが必要です</button>
+                        <button class="login-btn">家計簿を記録するには<br>ログインが必要です</button>
                     @else
                         <button class="add-btn">家計簿をつける</button>
                     @endguest
@@ -100,4 +100,13 @@
         </div>
     </div>
 </div>
+                <div class="search-content">
+                    <form action="{{ route('category_add') }}" method="post">
+                    @csrf
+                        <label for="year">
+                            <input type="text" name="category"/>
+                        </label>
+                        <button class="btn">追加</button>
+                    </form>
+                </div>  
 @endsection

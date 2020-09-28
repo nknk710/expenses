@@ -44,3 +44,8 @@ button {
 .search-btn {
     width: 100px;
 }
+
+.login-btn {
+    text-align: center;
+    margin: 30px 0 0 45px;
+}
