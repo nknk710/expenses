@@ -18,11 +18,12 @@ Route::get('/','HistoriesController@home');
 // ログイン状態
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/login_completed', 'HomeController@index')->name('home');
-    Route::post('/record_completed', 'HistoriesController@add');
-    Route::get('/index', 'HistoriesController@index')->name('index');
-    Route::get('/edit', 'HistoriesController@edit')->name('edit');
+    Route::post('/record_completed', 'HistoriesController@add')->name('add');
+    Route::get('/month_index', 'HistoriesController@month_index')->name('month_index');
+    Route::get('/year_index', 'HistoriesController@year_index')->name('year_index');
+    Route::post('/edit', 'HistoriesController@edit')->name('edit');
     Route::post('/update_completed', 'HistoriesController@update')->name('update');
-    Route::get('/delete', 'HistoriesController@delete');
+    Route::get('/delete', 'HistoriesController@delete')->name('delete');
 });
 
 

@@ -15,7 +15,7 @@
             
             <div class="content">
                 <h3>支出を記録する</h3>
-                <form method="POST" action="{{ action('HistoriesController@add') }}">
+                <form method="POST" action="{{ route('add') }}">
                     @csrf
                     @if (count($errors) > 0)
                         <ul>
@@ -44,17 +44,22 @@
                     </div>
                     <div class="data">
                         <p class="data-title">・金額</p>
-                        <span>¥ </span><input type="text" name="cost" placeholder="半角数字で入力してください"/>
+                        <span>¥ </span><input type="text" name="cost" class="yen" placeholder="半角数字で入力してください"/>
                     </div>
-                    <button class="add-btn">家計簿をつける</button>
+                    @guest
+                        <button class="add-btn">家計簿を記録するにはログインが必要です</button>
+                    @else
+                        <button class="add-btn">家計簿をつける</button>
+                    @endguest
                 </form>
                 
             </div>
             
-            <div class="content">
-                <h3>家計簿の検索</h3>
+            @auth
+            <div class="content month-search">
+                <h3>家計簿の検索（月ごと）</h3>
                 <div class="search-content">
-                    <form action="{{ action('HistoriesController@index') }}" method="get">
+                    <form action="{{ route('month_index') }}" method="get">
                     @csrf
                         <label for="year">
                             <select class="" for="year" name="year" id="" size="1" >
@@ -70,10 +75,28 @@
                             @endfor
                             </select>
                         </label>
-                        <button class="search-btn">絞り込む</button>
+                        <button class="search-btn">検 索</button>
                     </form>
                 </div>  
             </div>
+            
+            <div class="content year-search">
+                <h3>家計簿の検索（年ごと）</h3>
+                <div class="search-content">
+                    <form action="{{ route('year_index') }}" method="get">
+                    @csrf
+                        <label for="year">
+                            <select class="" for="year" name="year" id="" size="1" >
+                            @for ($i = 2020; $i < 2050; $i++)
+                                <option value="{{ $i }}">{{ $i }}年</option>
+                            @endfor
+                            </select>
+                        </label>
+                        <button class="search-btn">検 索</button>
+                    </form>
+                </div>  
+            </div>
+            @endauth
         </div>
     </div>
 </div>

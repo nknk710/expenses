@@ -132,6 +132,12 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'email' => [
+            'required' => ':attributeを入力してください',
+        ],
+        'password' => [
+            'required' => ':attributeを入力してください',
+        ],
     ],
 
     /*
@@ -150,6 +156,8 @@ return [
         'category' => 'カテゴリー',
         'cost' => '金額',
         'content' => 'メモ',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
     ],
 
 ];

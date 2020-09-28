@@ -12,7 +12,7 @@
 
             <div class="content">
                 <h3 class="title">支出を編集する</h3>
-                <form method="POST" action="{{ action('HistoriesController@update') }}">
+                <form method="POST" action="{{ route('update') }}">
                     @csrf
                     <input name="id" type="hidden" value="{{ $record->id }}">
                     @if (count($errors) > 0)
@@ -42,9 +42,9 @@
                     </div>
                     <div>
                         <p class="data-title">金額</p>
-                        <span>¥ </span><input type="text" name="cost" value="{{ $record->cost }}" placeholder="半角数字で入力してください"/>
+                        <span>¥ </span><input type="text" name="cost" class="yen" value="{{ $record->cost }}" placeholder="半角数字で入力してください"/>
                     </div>
-                    <button class="update-btn">収支を更新する</button>
+                    <button class="update-btn">支出を更新する</button>
                 </form>
                 
             </div>

@@ -6,7 +6,7 @@ button {
     width: 100px;
 }
 
-.category-total {
+.category-total, .month-total {
     border: 1px solid #888;
     padding: 30px;
     margin-bottom: 30px
@@ -25,11 +25,7 @@ button {
     font-size: 1.7rem;
 }
 
-.all-history {
-    border: 1px solid #888;
-    padding: 10px;
+.month-cost {
+    margin-left: 40px;
 }
 
-.form {
-    margin: 0;
-}

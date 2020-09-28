@@ -13,6 +13,7 @@
     <!-- Scripts -->
     <script src="{{ secure_asset('js/app.js') }}" defer></script>
     <script src="{{ secure_asset('js/expenses.js') }}" defer></script>
+    @yield('script')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -82,5 +83,6 @@
             <a href="{{ url('/') }}">ホーム画面へ戻る</a>
         </footer>
     </div>
+    @yield('script')
 </body>
 </html>

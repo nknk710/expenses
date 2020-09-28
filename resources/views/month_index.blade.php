@@ -11,7 +11,7 @@
         <div class="col-md-8">
             <div class="search-content">
                 
-                <form action="{{ action('HistoriesController@index') }}" method="get">
+                <form action="{{ route('month_index') }}" method="get">
                 @csrf
                     <label for="year">
                         <select class="" for="year" name="year" id="" size="1" >
@@ -27,7 +27,7 @@
                         @endfor
                         </select>
                     </label>
-                    <button class="search-btn">絞り込む</button>
+                    <button class="search-btn">検 索</button>
                 </form>
             </div>  
             <div class="main-content">
@@ -62,7 +62,7 @@
                 
                 <div class="all-history">
                     <h3 class="content-title">{{ $year }}年{{ $month }}月の支出詳細一覧</h3>
-                <form action="{{ action('HistoriesController@index') }}" method="get">
+                <form action="{{ route('month_index') }}" method="get">
                 @csrf
                     <input type="hidden" name="year" value="{{ $year }}">
                     <input type="hidden" name="month" value="{{ $month }}">
@@ -91,11 +91,21 @@
                                     <td>{{ str_limit($record->content, 100) }}</td>
                                     <td>¥{{ $record->cost }}</td>
                                     <td>
-                                        <div>
-                                            <a href="{{ action('HistoriesController@edit', ['id' => $record->id]) }}">編集</a>
+                                        <div class="form">
+                                            <form action="{{ route('edit')}}" method="POST">
+                                            @csrf
+                                                <input type="hidden" name="id" value="{{ $record->id }}">
+                                                <input type="submit" value="編集" class="btn btn-primary btn-sm">
+                                            </form>
                                         </div>
-                                        <div>
-                                            <a id="delete-btn" href="{{ action('HistoriesController@delete', ['id' => $record->id]) }}">削除</a>
+                                        <div class="form">
+                                            <form action="{{ route('delete')}}" method="GET">
+                                            @csrf
+                                                <input type="hidden" name="id" value="{{ $record->id }}">
+                                                <input type="hidden" name="year" value="{{ $year }}">
+                                                <input type="hidden" name="month" value="{{ $month }}">
+                                                <input type="submit" value="削除" class="btn btn-danger btn-sm btn-dell">
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

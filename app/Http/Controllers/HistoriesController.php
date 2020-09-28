@@ -16,7 +16,7 @@ class HistoriesController extends Controller
         return view('home', ['categories' => $categories]);
     }
     
-    public function index(Request $request)
+    public function month_index(Request $request)
     {
         $id = Auth::id();
         $year = $request->year;
@@ -26,20 +26,20 @@ class HistoriesController extends Controller
         if ($request->sort) {
             if ($request->sort == 'desc') {
                 $sort = $request->sort;
-                $records = $record->whereYear('date', 2020)
+                $records = $record->whereYear('date', $year)
                            ->whereMonth('date', $month)
                            ->orderBy('date', 'desc')
                            ->get();
             } else {
                 $sort = $request->sort;
-                $records = $record->whereYear('date', 2020)
+                $records = $record->whereYear('date', $year)
                            ->whereMonth('date', $month)
                            ->orderBy('date', 'asc')
                            ->get();
             } 
         } else {
             $sort = 'asc';
-            $records = $record->whereYear('date', 2020)
+            $records = $record->whereYear('date', $year)
                            ->whereMonth('date', $month)
                            ->orderBy('date', 'asc')
                            ->get();
@@ -50,7 +50,30 @@ class HistoriesController extends Controller
                          ->sum('cost');
         }
 
-        return view('index', ['records' => $records, 'year' => $year, 'month' => $month, 'sort' => $sort, 'categories' => $categories, 'category_total' => $category_total]);
+        return view('month_index', ['records' => $records, 'year' => $year, 'month' => $month, 'sort' => $sort, 'categories' => $categories, 'category_total' => $category_total]);
+    }
+    
+    public function year_index(Request $request)
+    {
+        $id = Auth::id();
+        $year = $request->year;
+        $categories = Category::pluck('category');
+        $record = History::where('user_id', $id);
+        $records = $record->whereYear('date', $year)
+                          ->get();
+
+        for ($i = 0; $i < count($categories); $i++) {
+            $category_total[] = $records->where('category', $categories[$i])
+                                        ->sum('cost');
+        }
+
+        for ($j = 1; $j <= 12; $j++) {
+            $month_total[] = History::where('user_id', $id)->whereYear('date', $year)
+                                                           ->whereMonth('date', $j)
+                                                           ->sum('cost');
+        }
+        
+        return view('year_index', ['year' => $year, 'categories' => $categories, 'category_total' => $category_total, 'month_total' => $month_total]);
     }
     
     public function add(Request $request)
@@ -95,8 +118,10 @@ class HistoriesController extends Controller
     public function delete(Request $request)
     {
         $record = History::find($request->id);
+        $year = $request->year;
+        $month = $request->month;
       
         $record->delete();
-        return redirect('index');
+        return redirect('month_index', ['year' => $year, 'month' => $month]);
     }
 }
