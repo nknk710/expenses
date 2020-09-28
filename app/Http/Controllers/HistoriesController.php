@@ -112,6 +112,7 @@ class HistoriesController extends Controller
         unset($history_form['_token']);
         
         $history->fill($history_form)->save();
+        
         return view('update_completed');
     }
     
@@ -122,7 +123,8 @@ class HistoriesController extends Controller
         $month = $request->month;
       
         $record->delete();
-        return redirect('month_index', ['year' => $year, 'month' => $month]);
+        
+        return redirect()->route('month_index', ['year' => $year, 'month' => $month]);
     }
     
 }
